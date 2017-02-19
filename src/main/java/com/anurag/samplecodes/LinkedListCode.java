@@ -83,23 +83,60 @@ public class LinkedListCode {
 		
 	}
 	
+	public void findRemoveLoop()
+	{
+		Node slow=head;
+		Node fast=head;
+		while(slow!=null && fast!=null && fast.next!=null)
+		{
+			slow=slow.next;
+			fast=fast.next.next;
+			
+			if(slow==fast)
+			{
+				System.out.println("loop found");
+				break;
+			}
+			
+		}
+		if(slow==fast)
+		{
+			slow=head;
+			while(slow.next!=fast.next)
+			{
+				slow=slow.next;
+				fast=fast.next;
+			}
+			fast.next=null;
+			return;
+		}
+	}
+	
 	public static void main(String args[])
 	{
 		LinkedListCode llist=new LinkedListCode();
 		Node one=new Node(1);
 		Node two=new Node(2);
 		Node three=new Node(3);
+		Node four=new Node(4);
+		Node five=new Node(5);
 		llist.head=one;
 		one.next=two;
 		two.next=three;
+		three.next=four;
+		four.next=five;
+		five.next=two;
+		llist.findRemoveLoop();
 		llist.printList();
-		llist.push(0);
+		/*llist.push(0);
 		llist.append(4);
 		llist.insertAfrer(one, 5);
 		System.out.println("-----------new list--------");
 		llist.printList();
 		llist.deleteNode(5);
 		System.out.println("????????????after deletion??????????");
-		llist.printList();
+		llist.printList();*/
+		
+		
 	}
 }
